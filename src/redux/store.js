@@ -1,33 +1,20 @@
-import { configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
-import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'reduxjs-toolkit-persist';
-import storage from 'reduxjs-toolkit-persist/lib/storage';
-import contactsReducer from './phonebook/phonebook-reducers';
-
-const persistConfig = {
-    key: 'contacts',
-    storage,
-    blacklist: ['filter'],
-  }
-
-const persistedReducer = persistReducer(persistConfig, contactsReducer);
-
-const middleware = [
-    ...getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-  ];
+import { configureStore } from '@reduxjs/toolkit';
+import { filterReducer } from './phonebook/phonebook-reducers';
+import logger from 'redux-logger';
+import { contactsApi } from './phonebook/phonebook-slice';
 
 export const store = configureStore({
-    reducer: {
-        contacts: persistedReducer,
-    },
-    middleware,
-    devTools: process.env.NODE_ENV === "development",
-  // включаем девтулзы только во время разработки
-  });
- export let persistor = persistStore(store);
+  reducer: {
+    filterReducer,
+    [contactsApi.reducerPath]: contactsApi.reducer,
+  },
+  middleware: getDefaultMiddleware => [
+    ...getDefaultMiddleware(),
+    contactsApi.middleware,
+    logger,
+  ],
+  devTools: process.env.NODE_ENV === 'development',
+});
 
 
 

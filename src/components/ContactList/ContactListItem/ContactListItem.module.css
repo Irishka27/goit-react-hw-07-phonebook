@@ -19,7 +19,7 @@
   }
   .button:hover,
   .button:focus {
-    background-color: #604af0f5;
+    background-color: hwb(44 8% 19% / 0.671);
     color: white;
     border: none;
   }

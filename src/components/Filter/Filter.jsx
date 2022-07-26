@@ -1,21 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { getFilter } from 'redux/phonebook/phonebook-selectors';
 import {  changeFilter } from '../../redux/phonebook/phonebook-actions';
 import s from './Filter.module.css';
 
 function Filter() {
-  const filter = useSelector(state => state.contacts.filter);
+  const value = useSelector(getFilter);
   const dispatch = useDispatch();
   
   const changedFilter = e => {
-    dispatch(changeFilter(e.currentTarget.value));
+    dispatch(changeFilter(e.target.value));
   }
+
   return (
     <div className={s.filter}>
       <label className={s.label}>Find contact by name
       <input
         className={s.input}
         type="text"
-        value={filter}
+        value={value}
         onChange={changedFilter}
       /></label>
     </div>

@@ -4,6 +4,7 @@
   max-width: 250px;
   padding: 20px;
   border: 1px solid black;
+  margin: 5px auto;
 }
 
 .input {
@@ -11,9 +12,10 @@
   height: 30px;
   border-radius: 5px;
   width: 250px;
+  background-color: rgb(182, 179, 196);
 }
 .label {
-  font-size: 30px;
+  font-size: 20px;
   margin-bottom: 8px;
 }
 .button {
@@ -23,8 +25,10 @@
   border-radius: 4px;
   width: 100px;
   height: 24px;
+  margin: 2px auto;
 }
 .button:hover,
 .button:focus {
   transform: scale(1.1);
+  background-color: hwb(44 8% 19% / 0.671); 
 }

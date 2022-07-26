@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+import { useDeleteContactMutation } from 'redux/phonebook/phonebook-slice';
 import s from './ContactListItem.module.css';
-const ContactListItem = ({ name, number, id, onDeleteContacts }) => {
+const ContactListItem = ({ name, number, id }) => {
+  const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
   return (
     <li className={s.li}>
       <div className={s.container}>
@@ -8,9 +10,9 @@ const ContactListItem = ({ name, number, id, onDeleteContacts }) => {
         <button
           type="button"
           className={s.button}
-          onClick={() => onDeleteContacts(id)}
+          onClick={() => deleteContact(id)}
         >
-          Delete
+          {isDeleting ? 'Deleting...' : 'Delete'}
         </button>
       </div>
     </li>
@@ -21,7 +23,6 @@ ContactListItem.propTypes = {
   id: PropTypes.any,
   name: PropTypes.string,
   number: PropTypes.string,
-  onDeleteContacts: PropTypes.func,
-};
+ };
 
 export default ContactListItem;

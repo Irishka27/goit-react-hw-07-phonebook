@@ -1,16 +1,19 @@
 import ContactForm from '../ContactForm';
 import ContactList from '../ContactList';
 import Filter from '../Filter';
+import Section from 'components/Section';
 import s from './App.module.css';
-// import { useDispatch, useSelector } from 'react-redux';
 
  function App () {
    return (
       <div className={s.container}>
+        <Section title={'Phonebook'}>
         <ContactForm />
-        <h3>Contacts</h3>
+        </Section>
+        <Section title={'Contacts'}>
         <Filter />
         <ContactList  />
+        </Section>
       </div>
     );
  
